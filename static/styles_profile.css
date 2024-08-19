@@ -1,0 +1,101 @@
+
+
+body {
+background-color: #000;
+color: #fff;
+}
+
+.profile-container {
+background-color: rgba(0, 0, 0, 0.8);
+padding: 30px;
+border-radius: 20px;
+}
+
+.profile {
+margin-bottom: 40px;
+}
+
+.faculty-details img {
+width: 200px;
+height: 200px;
+border-radius: 50%;
+object-fit: cover;
+border: 5px solid #fff;
+}
+
+.faculty-info h2 {
+font-size: 24px;
+font-weight: bold;
+margin-bottom: 10px;
+}
+
+.faculty-info p {
+font-size: 18px;
+margin-bottom: 5px;
+}
+
+.projects {
+color: #fff;
+}
+
+.projects h2 {
+color: #007bff;
+}
+
+.project-cards .card {
+background-color: rgba(255, 255, 255, 0.1);
+border: none;
+}
+
+.project-cards .card-title,
+.project-cards .card-text {
+color: #fff;
+}
+
+.project-cards .fas {
+color: #28a745;
+}
+
+/* Custom CSS */
+
+/* Profile Picture */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+}
+
+/* Project Cards */
+.card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Project Status Icons */
+.card-body i {
+    font-size: 24px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+/* Accordion */
+.accordion-button:not(.collapsed) {
+    color: #fff;
+    background-color: #007bff;
+}
+
+/* Internship Details */
+.list-group-item {
+    background-color: #f8f9fa;
+}
+
+/* Total Sanction Amount */
+.card-subtitle {
+    color: #007bff;
+}
+

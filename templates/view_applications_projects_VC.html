@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Applications for Project</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='apply_project.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Applications for Project</h2>
+    {% if applications %}
+    <table>
+      <thead>
+        <tr>
+            <th>Project ID</th>
+          <th>Student Name</th>
+          <th>USN</th>
+          <th>Department</th>
+          <th>Resume Link</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for application in applications %}
+        <tr>
+          <td>{{ application.project_id }}</td>  
+          <td>{{ application.student_name }}</td>
+          <td>{{ application.usn }}</td>
+          <td>{{ application.student_dept }}</td>
+          <td>{{ application.resume_link }}</td>
+          <td>
+            <form action="/approve_application_project_VC" method="POST">
+              <input type="hidden" name="project_id" value="{{ application.project_id }}">
+              <input type="hidden" name="usn" value="{{ application.usn }}">
+              <button type="submit" class="btn-primary">Approve</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p style="text-align: center; position: absolute; top: 10%; left: 46%;">Nothing yet!</p>
+    {% endif %}
+  </div>
+</body>
+</html>

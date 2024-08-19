@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautiful Table Display for Internships</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Global styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #fff;
+      font-size: 18px;
+      border-right: 1px solid #fff;
+    }
+
+    td {
+      background-color: #fff;
+      color: #333;
+      font-size: 16px;
+    }
+
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+
+    /* Form container styles */
+    .form-container {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+      display: block;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 12px;
+      border-radius: 5px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .back-button {
+      display: block;
+      margin-bottom: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #007bff;
+      font-size: 16px;
+    }
+
+    .back-button:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <a href="{{url_for('VC') }}" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
+
+  <div class="container">
+    <h2>Available Internships</h2>
+    <table>
+      <thead>
+        <tr>
+          <th><i class="fas fa-id-badge"></i> Internship ID</th>
+          <th><i class="fas fa-file-signature"></i> Title</th>
+          <th><i class="fas fa-calendar-alt"></i> Start Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for internship in internships %}
+        <tr>
+          <td>{{ internship.internship_id }}</td>
+          <td>{{ internship.title }}</td>
+          <td>{{ internship.start_date }}</td>
+          <td>{{internship.duration}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="form-container">
+      <h3>Apply for Internship</h3>
+      <form action="/student_internship_update" method="POST">
+        <div class="form-group">
+          <label for="internship_id">Internship ID:</label>
+          <select name="internship_id" id="internship_id">
+            {% for internship in internships %}
+            <option value="{{ internship.internship_id }}">{{ internship.internship_id }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="usn">USN:</label>
+          <input type="text" name="usn" id="usn" pattern="1RV2\d{1,2}[A-Za-z]{2}\d{3}" required>
+        </div>
+        
+        <button type="submit" class="btn-primary">Apply</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+/* Hero Section */
+.hero {
+    background-image: url("path/to/your/hero_image.jpg"); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: #fff;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero p {
+    font-size: 1.5rem;
+}
+
+/* Navigation Bar */
+.navbar {
+    padding: 20px 40px;
+    background-color: #333; /* Change navbar background color */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.2rem;
+}
+
+/* COE Sections */
+.coe-sections {
+    padding: 50px 0;
+}
+
+.coe-section {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 40px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.coe-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.coe-section i {
+    font-size: 4rem;
+}
+
+.coe-section h3 {
+    font-size: 2rem;
+}
+
+.coe-section p {
+    font-size: 1.2rem;
+}
+
+.coe-section a {
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+/* Admin Button */
+.btn-danger {
+    font-size: 1.2rem;
+    padding: 15px 40px;
+    border-radius: 30px;
+}
+
+.btn-danger:hover {
+    background-color: #f00;
+}

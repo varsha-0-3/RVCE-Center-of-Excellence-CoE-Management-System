@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Project</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='update_project_form.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Update Project</h2>
+    <form action="/update_project_new" method="POST" method="GET" >
+      <div class="form-group">
+        <label for="project_id">Project ID:</label>
+        <input type="number" id="project_id" name="project_id" value="{{ project_id }}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="project_status">Project Status:</label>
+        <select id="project_status" name="project_status">
+          <option value="STARTED">STARTED</option>
+          <option value="COMPLETED">COMPLETED</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="duration">Duration(in months):</label>
+        <input type="number" id="duration" name="duration" required oninput="validateduration()">
+      </div>
+      <!-- Add other form fields as needed -->
+
+      <button type="submit" class="btn-primary">Update</button>
+    </form>
+  </div>
+  <script>
+    function validateduration() {
+        var durationInput = document.getElementById('duration');
+        var durationValue = parseInt(durationInput.value);
+        if (durationValue <= 0 || isNaN(durationValue)) {
+            durationInput.setCustomValidity("Duration value is wrong");
+        } else {
+            durationInput.setCustomValidity("");
+        }
+    }
+  </script>
+</body>
+</html>

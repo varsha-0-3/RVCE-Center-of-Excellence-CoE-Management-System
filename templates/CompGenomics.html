@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computational Genomics COE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='VC.css') }}">
+    <!-- Include FontAwesome library for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    
+</head>
+
+<body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <header>
+        <h1>Computational Genomics COE</h1>
+        <div class="open-pane" onclick="openPane()">
+            <i class="fas fa-bars"></i>
+        </div>
+        {% if studentloggedin %}
+        {% if subscribed %}
+            <a href="{{ url_for('subscribe_to_coe', coe_id=1) }}" class="bell-icon-container1" title="Click to unsubscribe!">
+                <i class="material-icons subscribed">notifications_active</i>
+            
+                <span class="button-text subscribed-text">Subscribed</span>
+            </a>
+        {% else %}
+            <a href="{{ url_for('subscribe_to_coe', coe_id=1) }}" class="bell-icon-container" title="Click to get latest updates on your mail!">
+                <i class="material-icons">notifications_off</i>
+                
+                <span class="button-text">Subscribe</span>
+            </a>
+        {% endif %}
+    {% endif %}
+    
+    
+    
+      
+    </header>
+    
+    
+
+    <div class="button-pane" id="buttonPane">
+        <div class="profile-buttons">
+            {% if studentloggedin %}
+            <a href="/student_profile" class="profile-button"><i class="fas fa-user button-icon"></i>Student Profile</a>
+            <a href="/logout" class="profile-button"><i class="fas fa-sign-out-alt button-icon"></i>Logout</a>
+            <a href="/apply_project_VC" class="apply-button"><i class="fas fa-tasks button-icon"></i>View and Apply Projects</a>
+            <a href="/apply_internship_VC" class="internship-button"><i class="fas fa-briefcase button-icon"></i>Internships</a>
+            {% elif facultyloggedin and session['coe_id']==1 %}
+            <a href="/faculty_profile" class="profile-button"><i class="fas fa-user button-icon"></i>Faculty Profile</a>
+            <a href="/logout" class="profile-button"><i class="fas fa-sign-out-alt button-icon"></i>Logout</a>
+            <a href="{{url_for('project_form') }}" class="apply-button"><i class="fas fa-plus button-icon"></i>Add Projects</a>
+            <a href="{{url_for('VC_project_view') }}" class="apply-button"><i class="fas fa-eye button-icon"></i>View Project Status</a>
+            <a href="{{ url_for('internship_form') }}" class="apply-button"><i class="fas fa-plus button-icon"></i>Add Internship</a>
+            <a href="{{url_for('VC_internship_view') }}" class="apply-button"><i class="fas fa-eye button-icon"></i>View Internship Status</a>
+            {% else %}
+            <a href="{{url_for('internship_CG') }}" class="apply-button"><i class="fas fa-eye button-icon"></i>Internships</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="about-section">
+            <h2>Welcome to Computational Genomics COE!</h2>
+            <div class="objectives">
+                <div class="objective">
+                    <h3>Advanced Computing Facilities</h3>
+                    <p>We provide state-of-the-art computing facilities for students, research scholars, and faculty members.</p>
+                </div>
+                <div class="objective">
+                    <h3>Interdisciplinary Collaboration</h3>
+                    <p>Our objective is to foster interdisciplinary collaboration among students and faculty members to execute computationally intensive research projects.</p>
+                </div>
+                <div class="objective">
+                    <h3>Specialization in Cutting-edge Domains</h3>
+                    <p>At Computational Genomics COE, we specialize in cutting-edge domains such as Edge Computing, Parallel Programming, Artificial Intelligence, and Machine Learning.</p>
+                </div>
+                <div class="objective">
+                    <h3>Internships and Training</h3>
+                    <p>We offer internships, training, and skill enhancement in areas like image/video analytics, Mobile Application Development, Internet of Things, and Natural Language Processing.</p>
+                </div>
+            </div>
+        </section>
+        
+
+        <section>
+            
+            
+            {% if studentloggedin or facultyloggedin %}
+            <p> </p>
+          {% else %}
+            <p>Explore our services after logging in!</p>
+            {% endif %}
+        </section>
+    </div>
+    <a href="{{url_for('home') }}" class="back-button">Back</a>
+
+    <script>
+        function openPane() {
+            document.getElementById("buttonPane").classList.toggle("show-pane");
+        }
+    </script>
+</body>
+
+</html>

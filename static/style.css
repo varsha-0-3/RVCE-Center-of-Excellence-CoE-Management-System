@@ -1,0 +1,54 @@
+body {
+    font-family: 'Lato', sans-serif;
+    background-image: url("path/to/your/background.jpg"); /* Replace with your desired background image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for better contrast */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.login-heading {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.textbox {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn {
+    background-color: #4a75b5; /* Vibrant primary color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.bottom-text {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.bottom-text a {
+    color: #4a75b5; /* Link color matches button color */
+}

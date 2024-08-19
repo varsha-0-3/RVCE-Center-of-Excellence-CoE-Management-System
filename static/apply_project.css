@@ -1,0 +1,119 @@
+/* Overall container for a clean layout */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  /* Table title styling */
+  h2 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Base table styling for responsiveness and collapse */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px; /* Add subtle rounded corners */
+  }
+  
+  /* Header row styling */
+  th {
+    padding: 18px 18px;
+    text-align: left;
+    color: #fff;
+    background-color: #343a40; /* Dark header background */
+    font-weight: bold;
+    border: none; /* Remove default borders */
+  }
+  
+  /* Data row styling */
+  td {
+    padding: 10px 16px;
+    text-align: left;
+    border: 1px solid #ddd; /* Light border for data cells */
+  }
+  
+  /* Alternate row coloring with hover effect */
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tr:hover {
+    background-color: #f2f2f2;
+    cursor: pointer; /* Add hover cursor for potential interactivity */
+  }
+  
+  /* Target specific data cells for styling (optional) */
+  .important-data {
+    font-weight: bold;
+    color: #f00; /* Example: Highlight important data in red */
+  }
+
+  .back-button {
+    position: fixed; /* Fix the button to the top left corner */
+    top: 10px;
+    left: 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px; /* Add rounded corners */
+    font-size: 1.2rem; /* Adjust font size as needed */
+    display: flex; /* Allow alignment of icon and text */
+    align-items: center; /* Align icon and text vertically */
+    transition: all 0.3s ease-in-out; /* Add smooth hover effect */
+  }
+  
+  .back-button:hover {
+    background-color: #29323a; /* Darken background on hover */
+    cursor: pointer;
+  }
+  
+  .back-button i {
+    margin-right: 5px; /* Add spacing between icon and text */
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  form {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-control {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+  }
+  
+  .form-control:focus {
+    border-color: #8dbf00; /* Change border color on focus for better user feedback */
+    outline: none; /* Remove default outline */
+  }
+  
+  .btn-primary {
+    background-color: #343a40; /* Adjust button color if needed */
+    border-color: #343a40; /* Match button color */
+    color: #fff;
+  }
+  
+  .btn-primary:hover {
+    background-color: #29323a; /* Darken button on hover */
+    cursor: pointer;
+  }
+  

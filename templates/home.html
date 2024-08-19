@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centre of Excellence Management System</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style_home1.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-bkPbu1N9eVlgeBg2oEjFJkXb7Z9N7haHZWuE+y5LDG7sL3mg+egRLruYT+ynHn+MU9byG5b9phKMVOfMnKTf/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+</head>
+
+<body>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+  
+  <header class="hero d-flex justify-content-center align-items-center">
+    <div class="container text-center", style="color: black;">
+      <h1>Centre of Excellence Management System</h1>
+      <p class="lead">Transform your career with our diverse Centres of Excellence.</p>
+    </div>
+  </header>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <a class="navbar-brand" href="/">RVCE CoE System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+      {% if studentloggedin or facultyloggedin %}
+        <a href="{{ url_for('logout') }}" class="btn btn-light ml-3">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}" class="btn btn-light ml-3">Login</a>
+        <a href="{{ url_for('register') }}" class="btn btn-outline-light ml-2">Register</a>
+        {% endif %}
+    </div>
+  </nav>
+
+    <img src="static/rvce logo.png" alt="Description of your image" class="center" width="200" height="300">
+
+  
+    <!-- <section class="coe-sections mt-0">
+      <div class="container">
+        <h2 class="text-center mb-4">Explore our Centres of Excellence</h2>
+            <div class="coe-section coe-vc align-items-center justify-content-center text-center">
+              <i class="fas fa-desktop fa-5x mb-3 text-primary"></i>
+              <h3>Visual Computing (VC)</h3>
+              <p class="mb-4">Unlock the power of visual computing with our VC program.</p>
+              <a href="/VC" class="btn btn-primary">Learn More</a>
+            </div>
+      </div>
+    </section> -->
+    <section class="coe-sections mt-0">
+      <div class="container">
+        <h2 class="text-center mb-4">Explore our Centres of Excellence</h2>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="coe-section coe-vc d-flex flex-column align-items-center justify-content-center text-center">
+              <i class="fas fa-desktop fa-5x mb-3 text-primary"></i>
+              <h3>Visual Computing (VC)</h3>
+              <p class="mb-4">Unlock the power of visual computing with our VC program.</p>
+              <a href="/VC" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="coe-section coe-wic d-flex flex-column align-items-center justify-content-center text-center">
+              <i class="fas fa-cloud fa-5x mb-3 text-info"></i>
+              <h3>Women in Cloud (WIC)</h3>
+              <p class="mb-4">Empowering women in cloud computing for a brighter future.</p>
+              <a href="/WomenIC" class="btn btn-info">Learn More</a>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="coe-section coe-wic d-flex flex-column align-items-center justify-content-center text-center">
+              <i class="fas fa-cloud fa-5x mb-3 text-info"></i>
+              <h3>Computational Genomics</h3>
+              <p class="mb-4">Enlock the power of Computational Genomics for a brighter future.</p>
+              <a href="/CompGenomics" class="btn btn-info">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  {% if not studentloggedin and not facultyloggedin %}
+  <div class="container text-center mt-1">
+    <a href="{{ url_for('admin_register') }}" class="btn btn-danger">Admin</a>
+  </div>
+  {% endif %}
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <footer class="text-light bg-primary mt-5">
+    <div class="container py-4">
+      <div class="row">
+        <div class="col-md-4 mb-3 mb-md-0">
+          <h5>About Us</h5>
+          <p class="small">The Centre of Excellence Management System is designed to help students and faculty explore and engage with our centres of excellence.</p>
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled small">
+            <li><a href="#" class="text-light">Home</a></li>
+            <li><a href="#" class="text-light">About Us</a></li>
+            <li><a href="#" class="text-light">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5>Contact Us</h5>
+          <p class="small">Email: coecommunityconnect@gmail.com<br>Address: RV College of Engineering, Bengaluru</p>
+        </div>
+      </div>
+      <div class="border-top pt-3">
+        <p class="small mb-0">© 2024 RVCE Centre of Excellence. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+</body>
+
+</html>

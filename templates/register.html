@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .border {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            width: 400px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .word {
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .msg {
+            color: red;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .textbox {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .bottom {
+            text-align: center;
+            margin-top: 15px;
+            color: #fff;
+        }
+
+        .bottom a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .bottom a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div align="center">
+        <div class="border">
+            <div class="header">
+                <h1 class="word">Register</h1>
+            </div>
+            <form id="registerForm" action="{{ url_for('register') }}" method="post" onsubmit="return validateForm()">
+                <div class="msg" id="errorMsg"></div>
+                <input id="name" name="name" type="text" placeholder="Enter Your Full Name" class="textbox" pattern="[A-Za-z\s]+" title="Name must contain only letters" required/><br>
+                <input id="college" name="college" type="text" placeholder="Enter Your College Name" class="textbox" pattern="[A-Za-z\s]+" title="College Name must contain only letters" required/><br>
+                <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox" required/><br>
+                <select id="dept" name="dept" class="textbox" required>
+                    <option value="" disabled selected style="color: #000;">Select Your Department</option>
+                    <option value="ASE">ASE</option>
+                    <option value="BT">BT</option>
+                    <option value="CSE">CSE</option>
+                    <option value="CH">CH</option>
+                    <option value="CV">CV</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EIE">EIE</option>
+                    <option value="ETE">ETE</option>
+                    <option value="MECH">MECH</option>
+                    <option value="ISE">ISE</option>
+                </select><br>
+                <input id="usn" name="usn" type="text" pattern="1RV2\d{1,4}[A-Za-z]{2}\d{3}" placeholder="Enter Your USN" class="textbox" title="USN must be in the format 1RV21XX123" required/><br>
+                <input id="email_id" name="email_id" type="email" placeholder="Enter Your Email ID" class="textbox" required/><br>
+                <input id="phone_no" name="phone_no" type="tel" pattern="\d{10}" placeholder="Enter Your Phone Number (10 digits)" class="textbox" title="Phone number must be 10 digits" required/><br>
+                <input type="submit" class="btn" value="Sign Up"><br>
+            </form>
+            <p class="bottom">Already have an account? <a class="bottom" href="{{url_for('login')}}">Sign In here</a></p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var errorMsg = document.getElementById("errorMsg");
+            var usnInput = document.getElementById("usn").value;
+            var deptInput = document.getElementById("dept").value;
+
+            // Check if the department is selected
+            if (deptInput == "") {
+                errorMsg.innerHTML = "Please select your department";
+                return false;
+            }
+
+            // Check if the USN matches the pattern
+            var usnPattern = /^(1RV2\d{1,4}[A-Za-z]{2}\d{3})$/;
+            if (!usnPattern.test(usnInput)) {
+                errorMsg.innerHTML = "Please enter a valid USN";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

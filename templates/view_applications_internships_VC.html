@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Applications for  Internships</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='apply_project.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Applications for Internship</h2>
+    {% if applications %}
+    <table>
+      <thead>
+        <tr>
+            <th>Internship ID</th>
+          <th>Student Name</th>
+          <th>USN</th>
+          <th>Department</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for application in applications %}
+        <tr>
+          <td>{{ application.internship_id }}</td>  
+          <td>{{ application.student_name }}</td>
+          <td>{{ application.usn }}</td>
+          <td>{{ application.student_dept }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p style="text-align: center; position: absolute; top: 10%; left: 46%;">Nothing yet!</p>
+    {% endif %}
+  </div>
+</body>
+</html>

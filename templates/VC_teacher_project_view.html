@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautiful Table Display for Projects</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='apply_project.css') }}">
+  <style>
+    .back-button {
+      margin-top: 20px;
+      cursor: pointer;
+      color: #333;
+      text-decoration: none;
+      display: inline-block;
+      padding: 10px;
+      background-color: #eee;
+      border-radius: 5px;
+    }
+
+    /* Form styles */
+    .form-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+    }
+
+    .form-group label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-control {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px 12px;
+      width: 90%;
+    }
+
+    .form-control:focus {
+      border-color: #8dbf00;
+      outline: none;
+    }
+
+    .btn-primary {
+      background-color: #343a40;
+      border-color: #343a40;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: #29323a;
+    }
+
+    /* Additional styles for buttons in table */
+    .table-buttons {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .table-buttons button {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <a href="{{url_for('VC') }}" class="btn btn-primary back-button"><i class="fas fa-arrow-left"></i> Back</a>
+
+  <div class="container">
+    <h2>Projects at VC</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Project ID</th>
+          <th>Title</th>
+          <th>Start Date</th>
+          <th>Company</th>
+          <th>Sanctioned Amount</th>
+          <th>Project Status</th>
+          <th>Duration</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for project in projects %}
+        <tr>
+          <td>{{ project.project_id }}</td>
+          <td>{{ project.title }}</td>
+          <td>{{ project.start_date }}</td>
+          <td>{{ project.company_name }}</td>
+          <td>{{ project.sanction_amount }}</td>
+          <td>{{ project.project_status }}</td>
+          <td>{{ project.duration }}</td>
+          <td class="table-buttons">
+            <form id="updateForm" method="GET">
+              <input type="hidden" name="project_id" value="{{ project.project_id }}">
+              <button type="button" class="btn-primary" onclick="updateProject('{{ project.project_id }}')">Update</button>
+            </form>
+            <form action="/view_applications_project_VC" method="POST">
+              <input type="hidden" name="project_id" value="{{ project.project_id }}">
+              <button type="submit" class="btn-primary">View Applications</button>
+            </form>
+          </td>
+          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <script>
+    function updateProject(projectId) {
+      // Redirect to the teacher_update_project route with the project ID as a query parameter
+      window.location.href = `/teacher_update_project?project_id=${projectId}`;
+    }
+  </script>
+  
+</body>
+</html>

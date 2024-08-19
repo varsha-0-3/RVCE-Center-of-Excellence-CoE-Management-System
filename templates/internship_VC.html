@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautiful Table Display for Internships</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='internship.css') }}">
+</head>
+<body>
+  <a href="{{url_for('VC') }}" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
+
+  <div class="container">
+    <h2>Available Internships</h2>
+    <table>
+      <thead>
+        <tr>
+          <th><i class="fas fa-id-badge"></i> Internship ID</th>
+          <th><i class="fas fa-file-signature"></i> Title</th>
+          <th><i class="fas fa-calendar-alt"></i> Start Date</th>
+          <th><i class="fas fa-id-badge"></i> Duration (in months)</th>
+          <th><i class="fas fa-id-badge"></i> Fees(in Rs.) </th>
+       </tr>
+      </thead>
+      <tbody>
+        {% for internship in internships %}
+        <tr>
+          <td>{{ internship.internship_id }}</td>
+          <td>{{ internship.title }}</td>
+          <td>{{ internship.start_date }}</td>
+          <td>{{internship.duration}}</td>
+          <td>{{internship.fees}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+</body>
+</html>

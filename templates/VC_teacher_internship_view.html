@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautiful Table Display for Projects</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='apply_project.css') }}">
+  <style>
+    .back-button {
+      margin-top: 20px;
+      cursor: pointer;
+      color: #333;
+      text-decoration: none;
+      display: inline-block;
+      padding: 10px;
+      background-color: #eee;
+      border-radius: 5px;
+    }
+
+    /* Form styles */
+    .form-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+    }
+
+    .form-group label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-control {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 8px 12px;
+      width: 90%;
+    }
+
+    .form-control:focus {
+      border-color: #8dbf00;
+      outline: none;
+    }
+
+    .btn-primary {
+      background-color: #343a40;
+      border-color: #343a40;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: #29323a;
+    }
+
+    /* Additional styles for buttons in table */
+    .table-buttons {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .table-buttons button {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <a href="{{url_for('VC') }}" class="btn btn-primary back-button"><i class="fas fa-arrow-left"></i> Back</a>
+
+  <div class="container">
+    <h2>Internships at VC</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Internship ID</th>
+          <th>Title</th>
+          <th>Start Date</th>
+          <th>Duration</th>
+          <th>Fees(in Rupees)</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for project in internships %}
+        <tr>
+          <td>{{ project.internship_id }}</td>
+          <td>{{ project.title }}</td>
+          <td>{{ project.start_date }}</td>
+          <td>{{ project.duration }}</td>
+          <td>{{ project.fees }}</td>
+          <td class="table-buttons">
+            <form action="/view_applications_internship_VC" method="POST">
+              <input type="hidden" name="internship_id" value="{{ project.internship_id }}">
+              <button type="submit" class="btn-primary">View Enrollment</button>
+            </form>
+          </td>
+          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  
+</body>
+</html>

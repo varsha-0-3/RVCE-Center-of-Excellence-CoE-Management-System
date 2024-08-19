@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Computing COE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_coe.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>Visual Computing COE</h1>
+    </header>
+
+    <div class="profile-buttons">
+        <!-- Login and Register buttons -->
+        {% if session['user_type'] == 'student' %}
+        <button class="profile-button1" onclick="location.href='/profile'">&#128100; Student Profile</button>
+        <button class="profile-button2" onclick="location.href='/'">Home</button>
+        <button class="logout-button" onclick="logout()">Logout</button>
+        {% elif session['user_type'] == 'faculty' %}
+        <!-- Add faculty-specific buttons or content -->
+        <button class="profile-button1" onclick="location.href='/faculty_dashboard'">&#128100; Faculty Dashboard</button>
+        <button class="profile-button2" onclick="location.href='/'">Home</button>
+        <button class="logout-button" onclick="logout()">Logout</button>
+        {% else %}
+        <button class="profile-button" onclick="location.href='/user_type'">&#128274; Login</button>
+        <button class="profile-button" onclick="location.href='/register'">&#128101; Register</button>
+        {% endif %}
+    </div>
+
+    <section class="about-section">
+        <h2>About Us</h2>
+        <p>Welcome to Visual Computing COE! We are dedicated to...</p>
+    </section>
+
+    <section>
+        <button>Projects</button>
+        <button>Internships</button>
+    </section>
+
+    <script>
+        function logout() {
+            // Redirect to the Flask route for logout
+            window.location.href = '/logout';
+        }
+    </script>
+
+</body>
+
+</html>

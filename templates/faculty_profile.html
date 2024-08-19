@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Profile</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles_profile.css">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117; /* Dark gray */
+            color: #c9d1d9; /* Light gray */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .card {
+            background-color: #0d1117; /* Dark gray */
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #58a6ff; /* Blue */
+        }
+
+        .card-subtitle {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffb454; /* Orange */
+        }
+
+        .accordion-button {
+            background-color: #58a6ff; /* Blue */
+            color: #fff; /* White */
+            border: none;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+            margin-bottom: 1.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .accordion-button:hover {
+            background-color: #377ee6; /* Darker blue */
+        }
+
+        .list-group-item {
+            background-color: #f5f6f8; /* Darker gray */
+            border: none;
+            border-bottom: 1px solid #30363d; /* Gray */
+            font-size: 1.5rem;
+            padding: 1rem;
+        }
+
+        .list-group-item:last-child {
+            border-bottom: none;
+        }
+
+        .total-sanction {
+            color: #5cf06e; /* Green */
+            font-weight: bold;
+            font-size: 2.5rem;
+        }
+
+        .project-card {
+            background-color: #161b22; /* Darker gray */
+            border-radius: 20px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+        }
+
+        .project-card-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #c9d1d9; /* Light gray */
+        }
+
+        .project-card-text {
+            font-size: 2rem;
+            color: #8b949e; /* Gray */
+        }
+
+        .check-icon {
+            color: #5cf06e; /* Green */
+            font-size: 3rem;
+            margin-top: 1.5rem;
+        }
+
+        .internship-details {
+            margin-bottom: 3rem;
+        }
+
+        .dropdown-toggle::after {
+            display: inline-block;
+            margin-left: 0.255em;
+            vertical-align: 0.255em;
+            content: "";
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+        }
+
+        /* Chart styles */
+        .chart-container {
+            width: 100%;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="card">
+            <h1 class="card-title">Faculty and COE Profile</h1>
+            <div class="row justify-content-center align-items-center mb-5">
+                <div class="col">
+                    <h2 class="card-subtitle mb-3">{{ faculty_details.name }}</h2>
+                    <p class="card-text mb-2">{{ faculty_details.designation }}</p>
+                    <p class="card-text mb-2">{{ faculty_details.department }}</p>
+                    <p class="card-text mb-0">Email: {{ faculty_details.email_id }}</p>
+                </div>
+            </div>
+            <div class="accordion" id="projectsAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="completedProjectsHeading">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#completedProjectsCollapse" aria-expanded="true" aria-controls="completedProjectsCollapse">
+                            Completed Projects
+                        </button>
+                    </h2>
+                    <div id="completedProjectsCollapse" class="accordion-collapse collapse show" aria-labelledby="completedProjectsHeading">
+                        <div class="accordion-body">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
+                                {% for project in completed_projects %}
+                                    <div class="col">
+                                        <div class="project-card">
+                                            <h3 class="project-card-title">{{ project.title }}</h3>
+                                            <p class="project-card-text">{{ project.company_name }}</p>
+                                            <i class="fas fa-check-circle check-icon"></i>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Include similar structures for started and not started projects -->
+            </div>
+            
+            <!-- Internship Details -->
+            <div class="mb-5 internship-details">
+                <h2 class="card-subtitle mb-4">Internship Details</h2>
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#internshipDetailsCollapse" aria-expanded="true" aria-controls="internshipDetailsCollapse">
+                    Internship Details
+                </button>
+                <div id="internshipDetailsCollapse" class="collapse">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {% for internship in internship_details %}
+                                    <li class="list-group-item">{{ internship.title }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Sanction Amount -->
+            <div>
+                <h2 class="card-subtitle mb-4">Total Sanction Amount</h2>
+                <p class="card-text total-sanction">{{ total_sanction }}</p>
+            </div>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="chart-container">
+            <canvas id="projectPieChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Chart Script -->
+    <script>
+        // Pie Chart Data
+        var pieData = {
+            labels: ['Completed Projects', 'Started Projects', 'Not Started Projects'],
+            datasets: [{
+                label: 'Project Status',
+                data: [{{ completed_count }}, {{ started_count }}, {{ not_started_count }}],
+                backgroundColor: [
+                    '#5cf06e', // Green for Completed Projects
+                    '#ffb454', // Orange for Started Projects
+                    '#58a6ff'  // Blue for Not Started Projects
+                ]
+            }]
+        };
+
+        // Get pie chart context
+        var pieCtx = document.getElementById('projectPieChart').getContext('2d');
+
+        // Create the pie chart
+        var projectPieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: pieData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+
+    <!-- Bootstrap JS, jQuery, and Popper.js (for Bootstrap components) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
